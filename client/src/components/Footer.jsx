@@ -1,8 +1,12 @@
-import React from "react";
+import React from 'react';
+import Logo from '../images/logo.png';
 
 const Footer = () => {
     return (
-        <div>Footer</div>
+        <footer>
+            <img src={Logo} alt='logo' />
+            <span>Share your ketogenic life</span>
+        </footer>
     )
 }
 

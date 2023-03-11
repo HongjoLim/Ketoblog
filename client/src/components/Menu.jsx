@@ -1,8 +1,4 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-
-const Home = () => {
+const Menu = () => {
     const posts = [
         {
             id: 1,
@@ -29,26 +25,18 @@ const Home = () => {
             img: 'https://images.pexels.com/photos/6157049/pexels-photo-6157049.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
         },
     ];
-
     return (
-        <div className='home'>
-            <div className='posts'>
-                {posts.map((p) => (
-                    <div className='post' key={p.id}>
-                        <div className='img'>
-                            <img src={p.img} alt='' />
-                        </div>
-                        <div className='content'>
-                            <Link className='link' to={`blog/${p.id}`}>{p.title}</Link>
-                            <p>{p.desc}</p>
-                            <button>Read more</button>
-                        </div>
-                    </div>
-                    )
-                )}
-            </div>
+        <div className='menu'>
+            <h3>Other posts you may like</h3>  
+            {posts?.map((post) => (
+                <div className="blog" key={post?.id}>
+                    <img src={post.img} alt=''/>
+                    <h4>{post?.title}</h4>
+                    <button>Read More</button>
+                </div>
+            ))}
         </div>
-    )
+    );
 }
 
-export default Home;
+export default Menu;
