@@ -1,8 +1,9 @@
-$secondary: #4F8224;
+$secondary: #9e9e9e;
 
 .app {
   display: flex;
   justify-content: center;
+  background-color: #F5F5F5;
 
   .container {
     width: 1024px;
@@ -109,15 +110,16 @@ $secondary: #4F8224;
     }
 
     //FOOTER
-
     footer {
+      background-color: #8bc34a;
+      width:100%;
       margin-top: 100px;
       padding: 20px;
-      background-color: $secondary;
       display: flex;
       align-items: center;
       justify-content: space-between;
       font-size: 12px;
+
       img {
         height: 50px;
       }
@@ -145,7 +147,7 @@ $secondary: #4F8224;
             position: relative;
 
             &::after {
-              content: "";
+              content: '';
               width: 100%;
               height: 100%;
               background-color: $secondary;
@@ -196,9 +198,9 @@ $secondary: #4F8224;
       }
     }
 
-    //SINGLE
+    //Blog
 
-    .single {
+    .blog {
       display: flex;
       gap: 50px;
 
@@ -263,7 +265,7 @@ $secondary: #4F8224;
           color: #555;
         }
 
-        .post {
+        .blog {
           display: flex;
           flex-direction: column;
           gap: 10px;
@@ -301,7 +303,6 @@ $secondary: #4F8224;
 
     .add {
       margin-top: 20px;
-      display: flex;
       gap: 20px;
 
       .content {
@@ -330,7 +331,6 @@ $secondary: #4F8224;
       .menu {
         flex: 2;
         display: flex;
-        flex-direction: column;
         gap: 20px;
 
         .item {

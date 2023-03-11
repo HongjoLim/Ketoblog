@@ -3,7 +3,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Write from './pages/Write';
 import Home from './pages/Home';
-import Single from './pages/Single';
+import Blog from './pages/Blog';
 import Login from './pages/Login';
 import Register from './pages/Register';
 
@@ -34,8 +34,8 @@ const router = createBrowserRouter([
         element: <Home />
       },
       {
-        path: '/post/:id',
-        element: <Single />
+        path: '/blog/:id',
+        element: <Blog />
       },
       {
         path: '/write',
