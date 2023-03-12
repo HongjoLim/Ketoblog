@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 
 const Login = () => {
     return (
-        <div clasName='auth'>
+        <div className='auth'>
             <h1>Login</h1>
             <form>
                 <input type='text' placeholder='username'/>
