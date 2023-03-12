@@ -1,16 +1,17 @@
 import express from 'express';
 
-import userRouter from './routers/users.js';
 import authRouter from './routers/auth.js';
 import blogRouter from './routers/blogs.js';
 import * as dotenv from 'dotenv'
 import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
 
 const app = express();
 
-dotenv.config()
+dotenv.config();
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
-app.use('/api/users', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/blogs', blogRouter);
 
