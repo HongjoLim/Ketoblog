@@ -13,7 +13,7 @@ app.use('/api/users', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/blogs', blogRouter);
 
-const CONNECTION_URL = 'mongodb+srv://hongjolim:%40Ghdwh0326@cluster0.axfkv1w.mongodb.net/ketogram?retryWrites=true&w=majority';
+const CONNECTION_URL = '';
 
 mongoose.connect(CONNECTION_URL)
 .then(
