@@ -10,7 +10,7 @@ const app = express();
 
 dotenv.config();
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 app.use('/api/auth', authRouter);
 app.use('/api/blogs', blogRouter);

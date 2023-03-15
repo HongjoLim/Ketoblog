@@ -3,13 +3,7 @@ import bcrypt from 'bcrypt';
 import JsonWebToken from 'jsonwebtoken';
 
 export const register = (req, res) => {
-    const match = User.find({email: req.body.email})
-        .then(user => res.send(user))
-        .catch(err => {
-            if(err){
-                console.log(err);
-            }}
-    );
+    const match = User.find({email: req.body.email});
 
     if(match){
 
@@ -34,18 +28,15 @@ export const login = (req, res) => {
     User.findOne({email: req.body.email})
         .then(user => {
             if (!user) {
-                console.log('not registered yet');
-                res.status(404).json("You have not registered yet.");
+                res.status(404).json('You have not registered yet.');
             } else {
                 if (!bcrypt.compareSync(req.body.password, user.password)) {
-                    console.log('id password does not match');
-                    res.status(401).json('Password does not match.');
+                    res.status(401).send('Password does not match.');
                 } else {
-                    console.log('id password match');
-                    res.json(user);
+                    res.status(200).json(user);
                 }
             }
-        })
+        });
 };
 
 export const logout = (req, res) => {

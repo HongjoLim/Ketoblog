@@ -18,13 +18,13 @@ const Login = () => {
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
-        axios.post('/api/auth/login', user)
-            .then(navigate('/'))
-            .catch(err => {
-                if (err) {
-                   setErr(err.response.data);
-                }
-            });
+        e.preventDefault();
+        try {
+            await axios.post('/api/auth/login', user);
+            navigate('/');
+        } catch (err) {
+            setErr(err.response.data);
+        }
     }
     return (
         <div className='auth'>
@@ -33,7 +33,7 @@ const Login = () => {
                 <input type='text' placeholder='email' name='email' onChange={handleChange}/>
                 <input type='password' placeholder='password' name='password' onChange={handleChange}/>
                 <button onClick={handleSubmit}>Sign In</button>
-                {err && <p>err</p>}
+                {err && <p>{err}</p>}
                 <span>Not registered yet? <Link to='/register'>Register</Link></span>
             </form>
         </div>
