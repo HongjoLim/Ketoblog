@@ -24,13 +24,12 @@ const Register = () => {
     const handleSubmit = async e => {
         e.preventDefault();
 
-        await axios.post('/api/auth/register', user)
-            .then(navigate('/login'))
-            .catch(err => {
-                if(err){
-                    setErr(err.response.data);
-                }
-            });
+        try {
+            await axios.post('/api/auth/register', user);
+            navigate('/login');
+        } catch (err) {
+            setErr(err.response.data);
+        }
     }
 
     return (
