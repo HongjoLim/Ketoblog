@@ -5,12 +5,14 @@ import blogRouter from './routers/blogs.js';
 import * as dotenv from 'dotenv'
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 
 dotenv.config();
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 app.use('/api/auth', authRouter);
 app.use('/api/blogs', blogRouter);

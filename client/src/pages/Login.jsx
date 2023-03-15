@@ -20,7 +20,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('/api/auth/login', user);
+            const res = await axios.post('/api/auth/login', user);
             navigate('/');
         } catch (err) {
             setErr(err.response.data);

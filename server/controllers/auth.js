@@ -1,6 +1,6 @@
 import User from '../models/user.js';
 import bcrypt from 'bcrypt';
-import JsonWebToken from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 
 export const register = (req, res) => {
     const match = User.find({email: req.body.email});
@@ -32,8 +32,15 @@ export const login = (req, res) => {
             } else {
                 if (!bcrypt.compareSync(req.body.password, user.password)) {
                     res.status(401).send('Password does not match.');
+                // Authentication successful
                 } else {
-                    res.status(200).json(user);
+                    const token = jwt.sign({id: user.id}, "jwtkey");
+                    const { password, ...rest } = user;
+                    console.log(user);
+                    res.cookie('access_token', token, 
+                    {
+                        httpOnly: true
+                    }).status(200).json(rest);
                 }
             }
         });
