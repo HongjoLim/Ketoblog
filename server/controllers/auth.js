@@ -35,17 +35,18 @@ export const login = (req, res) => {
                 // Authentication successful
                 } else {
                     const token = jwt.sign({id: user.id}, "jwtkey");
-                    const { password, ...rest } = user;
-                    console.log(user);
                     res.cookie('access_token', token, 
                     {
                         httpOnly: true
-                    }).status(200).json(rest);
+                    }).status(200).json(user);
                 }
             }
         });
 };
 
 export const logout = (req, res) => {
-
+    res.clearCookie('access_token', {
+        sameSite: 'none',
+        secure: true
+    }).status(200).json('You successfully signed out.');
 };
