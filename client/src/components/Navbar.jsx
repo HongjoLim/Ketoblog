@@ -18,13 +18,10 @@ const Navbar = () => {
                     </Link>
                 </div>
                 <div className='links'>
-                    <Link className='link' to='/?cat=blogs'>
-                        <h6>Blogs</h6>
-                    </Link>
                     <Link className='link' to='/?cat=recipes'>
                         <h6>Recipes</h6>
                     </Link>
-                    <Link className='link' to='/?cat=Food'>
+                    <Link className='link' to='/?cat=food'>
                         <h6>Food</h6>
                     </Link>
                     <Link className='link' to='/?cat=nutrition'>
