@@ -8,7 +8,6 @@ const Home = () => {
     const cat = useLocation().search
 
     useEffect(() => {
-        console.log(`cat: ${cat}`);
         const getPosts = async () => {
             try {
                 const res = await axios.get(`/api/blogs${cat}`);

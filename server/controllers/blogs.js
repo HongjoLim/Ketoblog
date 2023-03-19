@@ -2,7 +2,6 @@ import Blog from '../models/blog.js';
 
 export const getBlogs = async (req, res) => {
     const blogs = await Blog.find();
-    console.log("getblogs called");
     res.status(200).send(blogs);
 }
 

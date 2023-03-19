@@ -2,6 +2,7 @@ import express from 'express';
 
 import authRouter from './routers/auth.js';
 import blogRouter from './routers/blogs.js';
+import categoryRouter from './routers/categories.js';
 import * as dotenv from 'dotenv'
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
@@ -16,6 +17,7 @@ app.use(cookieParser());
 
 app.use('/api/auth', authRouter);
 app.use('/api/blogs', blogRouter);
+app.use('/api/cats', categoryRouter);
 
 mongoose.connect(process.env.CONNECTION_URL)
 .then(
