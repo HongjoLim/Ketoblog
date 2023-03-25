@@ -2,8 +2,8 @@ import User from '../models/user.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-export const register = (req, res) => {
-    User.findOne({ user_email: req.body.user_email })
+export const register = async (req, res) => {
+    await User.findOne({ user_email: req.body.user_email })
     .then(user => {
         if (!user) {
             const salt = bcrypt.genSaltSync(10);
@@ -24,9 +24,8 @@ export const register = (req, res) => {
     });
 };
 
-export const login = (req, res) => {
-    console.log(req.body.user_email)
-    User.findOne({ user_email: req.body.user_email })
+export const login = async (req, res) => {
+    await User.findOne({ user_email: req.body.user_email })
         .then(user => {
             console.log(user);
             if (!user) {
@@ -52,15 +51,3 @@ export const logout = (req, res) => {
         secure: true
     }).status(200).json('You successfully signed out.');
 };
-
-export const getUser = (req, res) => {
-    User.findOne({ user_email: req.body.user_email })
-        .then(user => {
-            if (!user) {
-                res.status(404).json('User not found.');
-            } else {
-                const {password, ...rest} = {user};
-                res.status(200).json(rest);
-            }
-        })
-}

@@ -24,12 +24,12 @@ const Home = () => {
         <div className='home'>
             <div className='posts'>
                 {posts.map((p) => (
-                    <div className='post' key={p.id}>
+                    <div className='post' key={p._id}>
                         <div className='img'>
                             <img src={p.img} alt='' />
                         </div>
                         <div className='content'>
-                            <Link className='link' to={`blog/${p.id}`}>{p.title}</Link>
+                            <Link className='link' to={`/blog/${p._id}`}>{p.title}</Link>
                             <p>{p.desc}</p>
                             <button>Read more</button>
                         </div>
