@@ -1,26 +1,65 @@
 import { useState } from 'react';
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import {useLocation, useNavigate} from 'react-router-dom';
+import axios from 'axios';
+import moment from 'moment';
 
 const Write = () => {
-    const [value, setValue] = useState('');
+    const state = useLocation().state;
+    const [title, setTitle] = useState(state?.title || '');
+    const [content, setContent] = useState(state?.content || '');
+    const [file, setFile] = useState(null);
+    const [cat, setCat] = useState(state?.cat || '');
 
-    const [file, setFile] = useState({});
+    const navigate = useNavigate();
 
-    const handleClick = (e) => {
+    const upload = async () => {
+        try {
+            const formData = new FormData();
+            formData.append('file', file);
+            const res = await axios.put('/api/upload', formData);
+            console.log(res);
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
+    const handleClick = async (e) => {
+        e.preventDefault();
+        const imgUrl = await upload();
+
+        try {
+            state
+              ? await axios.put(`/blogs/${state.id}`, {
+                  title,
+                  content: content,
+                  cat,
+                  img_url: file ? imgUrl : '',
+                })
+              : await axios.post(`/blogs/`, {
+                  title,
+                  content: content,
+                  cat,
+                  img_url: file ? imgUrl : '',
+                  date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
+                });
+                navigate("/")
+          } catch (err) {
+            console.log(err);
+          }
     }
 
     return (
         <div className='add'>
             <div className='content'>
-                <input type='text' placeholder='Title' />
+                <input type='text' placeholder='Title' onChange={e=> setTitle(e.target.value)}/>
                 <div className='editorContainer'>
                     <ReactQuill
                         className='editor'
                         theme='snow'
-                        value={value}
-                        onChange={setValue}
+                        value={content}
+                        onChange={e=> setContent(e.target.value)}
                     />
                 </div>
                 <div className='ad'></div>
@@ -53,36 +92,33 @@ const Write = () => {
                     <div className="cat">
                         <input
                             type="radio"
-                            name="cat"
-                            value="blog"
-                            id="blog"
-                        />
-                        <label htmlFor="Blog">Blog</label>
-                    </div>
-                    <div className="cat">
-                        <input
-                            type="radio"
+                            checked={cat === 'recipe'}
                             name="cat"
                             value="recipe"
                             id="recipe"
+                            onChange={e=>setCat(e.target.value)}
                         />
                         <label htmlFor="recipe">Recipe</label>
                     </div>
                     <div className="cat">
                         <input
                             type="radio"
+                            checked={cat === 'food'}
                             name="cat"
                             value="food"
                             id="food"
+                            onChange={e=>setCat(e.target.value)}
                         />
                         <label htmlFor="food">Food</label>
                     </div>
                     <div className="cat">
                         <input
                             type="radio"
+                            checked={cat === 'nutrition'}
                             name="cat"
                             value="nutrition"
                             id="nutrition"
+                            onChange={e=>setCat(e.target.value)}
                         />
                         <label htmlFor="nutrition">Nutrition</label>
                     </div>

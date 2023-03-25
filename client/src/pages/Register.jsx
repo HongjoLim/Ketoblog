@@ -7,9 +7,9 @@ const Register = () => {
     const [user, setUser] = useState({
         name: '',
         surname: '',
-        email: '',
+        user_email: '',
         password: '',
-        img: null,
+        img_url: null,
         joined: Date.now
     });
 
@@ -38,7 +38,7 @@ const Register = () => {
             <form>
                 <input type='text' placeholder='first name' name='name' onChange={handleChange}/>
                 <input type='text' placeholder='last name' name='surname' onChange={handleChange}/>
-                <input type='email' placeholder='email' name='email' onChange={handleChange}/>
+                <input type='email' placeholder='email' name='user_email' onChange={handleChange}/>
                 <input type='password' placeholder='password' name='password' onChange={handleChange}/>
                 <button onClick={handleSubmit}>Register</button>
                 {err && <p>{err}</p>}
