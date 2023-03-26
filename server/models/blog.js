@@ -3,10 +3,10 @@ const { Schema } = mongoose;
 
 const blogSchema = new Schema({
     title: String,
-    cat_id: String,
+    cat: String,
     content: String,
     user_email: String,
-    comments: [{ user_id: String, date: String, comment: String}],
+    comments: [{ user_email: String, date: String, comment: String}],
     date: {type: Date, default: Date.now},
     hidden: Boolean,
     meta: {
