@@ -2,6 +2,17 @@ import User from '../models/user.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
+export const getUser = async (req, res) => {
+    await User.findOne({ user_email: req.params.user_email })
+    .then(user => {
+        if (user) {
+            res.status(200).json(user);
+        } else {
+            res.status(404).json('User not found');
+        }
+    });
+};
+
 export const register = async (req, res) => {
     await User.findOne({ user_email: req.body.user_email })
     .then(user => {
@@ -27,7 +38,6 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
     await User.findOne({ user_email: req.body.user_email })
         .then(user => {
-            console.log(user);
             if (!user) {
                 res.status(404).json('You have not registered yet.');
             } else {
