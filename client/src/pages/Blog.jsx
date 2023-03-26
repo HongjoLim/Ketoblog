@@ -23,15 +23,30 @@ const Blog = () => {
         const getBlog = async () => {
             try {
                 const res = await axios.get(`/api/blogs/${blogId}`);
-                setBlog(res.data);
+                return res.data;
             } catch (err) {
                 console.log(err);
             }
         }
 
-        getBlog();
-    }, [blogId])
+        const getPostedUser = async (user_email) => {
+            try{
+                const res = await axios.get(`/api/auth/${user_email}`);
+                return res.data;
+            } catch (err) {
+                console.log(err);
+            }
+        }
 
+        const fetchAllData = async () => {
+            const match_blog = await getBlog();
+            const match_user = await getPostedUser(match_blog.user_email);
+            setBlog(match_blog);
+            setPostedUser(match_user);
+        }
+
+        fetchAllData();
+    }, [blogId]);
 
     const handleDelete = async e => {
         e.preventDefault();
@@ -49,13 +64,13 @@ const Blog = () => {
     return (
         <div className='blog'>
             <div className='content'>
-                <img src={blog.img_url} alt='' />
+                <img src={blog?.img_url} alt='' />
                 <div className='user'>
-                    {postedUser.img && <img src={postedUser.img} alt='' />}
+                    {postedUser?.img && <img src={postedUser?.img} alt='' />}
                     <div className='info'>
                         <span>{postedUser?.name}</span>
-                        <p>Posted {moment(blog.date).fromNow()}</p>
-                        {currentUser.user_email == blog.user_email && (
+                        <p>Posted {moment(blog?.date).fromNow()}</p>
+                        {currentUser?.user_email === blog?.user_email && (
                         <div className='edit'>
                             <Link to={`/write?edit=${blog._id}`} state={blog}>
                                 <img src={Edit} alt='' onClick={handleEdit}/>

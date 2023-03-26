@@ -2,7 +2,6 @@ import { useContext } from 'react';
 import Logo from '../images/logo.png';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/authContext';
-import axios from 'axios';
 
 const Navbar = () => {
 
