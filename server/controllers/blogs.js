@@ -46,7 +46,7 @@ export const deleteBlog = (req, res) => {
         if (err){
             res.status(403).json('Invalid access token');
         } else {
-            await Blog.findOneAndRemove({_id: req.params._id, user_email: userInfo.user_email});
+            await Blog.deleteOne({_id: req.params._id});
             res.status(200).send('deleted');
         }
     });
@@ -61,7 +61,7 @@ export const updateBlog = async (req, res) => {
         if (err){
             res.status(403).json('Invalid access token');
         } else {
-            await Blog.updateOne({_id: req.params._id, user_email: userInfo.user_email});
+            await Blog.updateOne({_id: req.params._id});
             res.status(200).send('updated');
         }
     });
