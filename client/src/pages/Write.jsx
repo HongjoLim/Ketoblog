@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import {useLocation, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
+import {AuthContext} from '../context/authContext';
 
 const Write = () => {
     const state = useLocation().state;
@@ -12,14 +13,16 @@ const Write = () => {
     const [file, setFile] = useState(null);
     const [cat, setCat] = useState(state?.cat || '');
 
+    const { currentUser } = useContext(AuthContext);
+
     const navigate = useNavigate();
 
     const upload = async () => {
         try {
             const formData = new FormData();
             formData.append('file', file);
-            const res = await axios.put('/api/upload', formData);
-            console.log(res);
+            const res = await axios.post('/api/upload', formData);
+
         } catch (err) {
             console.log(err);
         }
@@ -27,24 +30,29 @@ const Write = () => {
 
     const handleClick = async (e) => {
         e.preventDefault();
-        const imgUrl = await upload();
+        let imgUrl = '';
+        if (file)
+        {
+            imgUrl = await upload();
+        }
 
         try {
             state
-              ? await axios.put(`/blogs/${state.id}`, {
+              ? await axios.put(`/api/blogs/${state.id}`, {
                   title,
                   content: content,
                   cat,
-                  img_url: file ? imgUrl : '',
+                  img_url: imgUrl,
                 })
-              : await axios.post(`/blogs/`, {
+              : await axios.post(`/api/blogs/`, {
                   title,
                   content: content,
                   cat,
-                  img_url: file ? imgUrl : '',
+                  img_url: imgUrl,
+                  user_email: currentUser.user_email,
                   date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
                 });
-                navigate("/")
+            navigate("/");
           } catch (err) {
             console.log(err);
           }
@@ -59,7 +67,7 @@ const Write = () => {
                         className='editor'
                         theme='snow'
                         value={content}
-                        onChange={e=> setContent(e.target.value)}
+                        onChange={setContent}
                     />
                 </div>
                 <div className='ad'></div>

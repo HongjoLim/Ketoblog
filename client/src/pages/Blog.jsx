@@ -50,9 +50,12 @@ const Blog = () => {
 
     const handleDelete = async e => {
         e.preventDefault();
-
-        await axios.delete(`/api/blogs/${blogId}`);
-        navigate('/');
+        try {
+            await axios.delete(`/api/blogs/${blogId}`);
+            navigate('/');
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     const handleEdit = async e => {
@@ -75,7 +78,7 @@ const Blog = () => {
                             <Link to={`/write?edit=${blog._id}`} state={blog}>
                                 <img src={Edit} alt='' onClick={handleEdit}/>
                             </Link>
-                            <Link to={`/delete/${blog._id}`}>
+                            <Link to={`/api/${blog._id}`}>
                                 <img src={Delete} alt='' onClick={handleDelete}/>
                             </Link>
                         </div>
