@@ -28,7 +28,12 @@ const Navbar = () => {
                         <h6>Nutrition</h6>
                     </Link>
                     <span>{currentUser?.name}</span>
-                    {currentUser ? <span onClick={logout}>Sign Out</span> : <Link className='link' to='/login'>Sign In</Link>}
+                    {currentUser ? <>
+                    <span onClick={logout}>Sign Out</span>
+                    <span className='write'><Link className='link' to='/write'>Post</Link></span>
+                    </>
+                    : <Link className='link' to='/login'>Sign In</Link>
+                    }
                 </div>
             </div>
         </div>

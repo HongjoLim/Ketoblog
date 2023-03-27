@@ -1,4 +1,4 @@
-$secondary: #9e9e9e;
+$secondary: #618833;
 
 .app {
   display: flex;
@@ -99,7 +99,7 @@ $secondary: #9e9e9e;
             border: 1px solid white;
 
             &:hover {
-              color: teal;
+              color: $secondary;
               background-color: white;
               border: 1px solid teal;
             }

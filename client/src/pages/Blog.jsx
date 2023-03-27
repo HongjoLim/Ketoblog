@@ -5,6 +5,8 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Menu from '../components/Menu';
 import axios from 'axios';
 import moment from 'moment';
+
+import DOMPurify from 'dompurify';
 import { AuthContext } from '../context/authContext';
 
 const Blog = () => {
@@ -58,10 +60,9 @@ const Blog = () => {
         }
     }
 
-    const handleEdit = async e => {
-        e.preventDefault();
-        await axios.put(`/api/blogs/${blogId}`);
-        navigate('/');
+    const getContentText = html => {
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        return doc.body.textContent;
     }
 
     return (
@@ -76,7 +77,7 @@ const Blog = () => {
                         {currentUser?.user_email === blog?.user_email && (
                         <div className='edit'>
                             <Link to={`/write?edit=${blog._id}`} state={blog}>
-                                <img src={Edit} alt='' onClick={handleEdit}/>
+                                <img src={Edit} alt=''/>
                             </Link>
                             <Link to={`/api/${blog._id}`}>
                                 <img src={Delete} alt='' onClick={handleDelete}/>
@@ -86,8 +87,8 @@ const Blog = () => {
                     </div>
                 </div>
                 <h1>{blog.title}</h1>
-                <p>{blog.content}</p>
-            </div>
+                <p dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(blog.content),}}></p>
+                </div>
             <Menu />
         </div>
     )

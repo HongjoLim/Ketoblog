@@ -11,7 +11,7 @@ const Write = () => {
     const [title, setTitle] = useState(state?.title || '');
     const [content, setContent] = useState(state?.content || '');
     const [file, setFile] = useState(null);
-    const [cat, setCat] = useState(state?.cat || '');
+    const [cat, setCat] = useState(state?.cat || undefined);
 
     const { currentUser } = useContext(AuthContext);
 
@@ -35,18 +35,17 @@ const Write = () => {
         {
             imgUrl = await upload();
         }
-
         try {
             state
-              ? await axios.put(`/api/blogs/${state.id}`, {
+              ? await axios.put(`/api/blogs/${state._id}`, {
                   title,
-                  content: content,
+                  content,
                   cat,
                   img_url: imgUrl,
                 })
               : await axios.post(`/api/blogs/`, {
                   title,
-                  content: content,
+                  content,
                   cat,
                   img_url: imgUrl,
                   user_email: currentUser.user_email,
@@ -57,7 +56,7 @@ const Write = () => {
             console.log(err);
           }
     }
-
+    
     return (
         <div className='add'>
             <div className='content'>
@@ -100,7 +99,7 @@ const Write = () => {
                     <div className="cat">
                         <input
                             type="radio"
-                            checked={cat === 'recipe'}
+                            checked={cat===undefined || cat === 'recipe'}
                             name="cat"
                             value="recipe"
                             id="recipe"

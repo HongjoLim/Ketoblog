@@ -26,7 +26,7 @@ export const addBlog = async (req, res) => {
 
     const blog = new Blog({
         title: req.body.title,
-        content: req.body.desc,
+        content: req.body.content,
         img_url: req.body.img_url,
         cat: req.body.cat,
         date: req.body.date,
@@ -54,7 +54,6 @@ export const deleteBlog = (req, res) => {
 
 export const updateBlog = async (req, res) => {
     const token = req.cookies.access_token;
-    console.log(token);
     if (!token) {
         return res.status(401).json('Authentication failed!');
     } else jwt.verify(token, 'jwtkey', async (err, userInfo) => {
