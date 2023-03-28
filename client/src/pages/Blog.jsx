@@ -60,15 +60,10 @@ const Blog = () => {
         }
     }
 
-    const getContentText = html => {
-        const doc = new DOMParser().parseFromString(html, 'text/html');
-        return doc.body.textContent;
-    }
-
     return (
         <div className='blog'>
             <div className='content'>
-                <img src={blog?.img_url} alt='' />
+                <img src={blog?.img_url ? `../upload/${blog?.img_url}` : ''} alt='' />
                 <div className='user'>
                     {postedUser?.img && <img src={postedUser?.img} alt='' />}
                     <div className='info'>
@@ -89,7 +84,7 @@ const Blog = () => {
                 <h1>{blog.title}</h1>
                 <p dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(blog.content),}}></p>
                 </div>
-            <Menu />
+            <Menu cat={blog.cat}/>
         </div>
     )
 }
