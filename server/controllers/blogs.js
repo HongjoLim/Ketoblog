@@ -60,7 +60,7 @@ export const updateBlog = async (req, res) => {
         if (err){
             res.status(403).json('Invalid access token');
         } else {
-            await Blog.updateOne({_id: req.params._id});
+            await Blog.updateOne({_id: req.params._id}, {title: req.body.title, content: req.body.content, cat:req.body.cat, img_url:req.body.img_url});
             res.status(200).send('updated');
         }
     });

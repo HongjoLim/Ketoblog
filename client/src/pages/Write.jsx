@@ -12,7 +12,7 @@ const Write = () => {
     const [content, setContent] = useState(state?.content || '');
     const [file, setFile] = useState(null);
     const [cat, setCat] = useState(state?.cat || undefined);
-
+    
     const { currentUser } = useContext(AuthContext);
 
     const navigate = useNavigate();
@@ -22,6 +22,7 @@ const Write = () => {
             const formData = new FormData();
             formData.append('file', file);
             const res = await axios.post('/api/upload', formData);
+            return res.data;
 
         } catch (err) {
             console.log(err);
@@ -33,7 +34,10 @@ const Write = () => {
         let imgUrl = '';
         if (file)
         {
+            console.log('about to upload file');
             imgUrl = await upload();
+
+            console.log(imgUrl);
         }
         try {
             state
@@ -60,7 +64,7 @@ const Write = () => {
     return (
         <div className='add'>
             <div className='content'>
-                <input type='text' placeholder='Title' onChange={e=> setTitle(e.target.value)}/>
+                <input type='text' placeholder='Title' value={title} onChange={e=> setTitle(e.target.value)}/>
                 <div className='editorContainer'>
                     <ReactQuill
                         className='editor'

@@ -26,7 +26,7 @@ const Home = () => {
                 {posts.map((p) => (
                     <div className='post' key={p._id}>
                         <div className='img'>
-                            <img src={p.img} alt='' />
+                            <img src={`../upload/${p.img_url}`} alt='' />
                         </div>
                         <div className='content'>
                             <Link className='link' to={`/blog/${p._id}`}>{p.title}</Link>
