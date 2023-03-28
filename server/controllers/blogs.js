@@ -26,7 +26,7 @@ export const addBlog = async (req, res) => {
 
     const blog = new Blog({
         title: req.body.title,
-        content: req.body.desc,
+        content: req.body.content,
         img_url: req.body.img_url,
         cat: req.body.cat,
         date: req.body.date,
@@ -46,7 +46,7 @@ export const deleteBlog = (req, res) => {
         if (err){
             res.status(403).json('Invalid access token');
         } else {
-            await Blog.findOneAndRemove({_id: req.params._id, user_email: userInfo.user_email});
+            await Blog.deleteOne({_id: req.params._id});
             res.status(200).send('deleted');
         }
     });
@@ -54,14 +54,13 @@ export const deleteBlog = (req, res) => {
 
 export const updateBlog = async (req, res) => {
     const token = req.cookies.access_token;
-    console.log(token);
     if (!token) {
         return res.status(401).json('Authentication failed!');
     } else jwt.verify(token, 'jwtkey', async (err, userInfo) => {
         if (err){
             res.status(403).json('Invalid access token');
         } else {
-            await Blog.updateOne({_id: req.params._id, user_email: userInfo.user_email});
+            await Blog.updateOne({_id: req.params._id});
             res.status(200).send('updated');
         }
     });
