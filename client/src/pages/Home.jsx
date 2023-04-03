@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import DOMPurify from 'dompurify';
 
 const Home = () => {
     const [posts,setPosts] = useState([]);
@@ -29,9 +30,13 @@ const Home = () => {
                             <img src={`../upload/${p.img_url}`} alt='' />
                         </div>
                         <div className='content'>
-                            <Link className='link' to={`/blog/${p._id}`}>{p.title}</Link>
-                            <p>{p.desc}</p>
-                            <button>Read more</button>
+                            <Link className='link' to={`/blog/${p._id}`}>
+                                <h2>{p.title}</h2>
+                            </Link>
+                            <p><p dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(p.content),}}></p></p>
+                            <Link className='link' to={`/blog/${p._id}`}>
+                                <button>Read more</button>
+                            </Link>
                         </div>
                     </div>
                     )
