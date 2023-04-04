@@ -4,7 +4,7 @@ import "react-quill/dist/quill.snow.css";
 import {useLocation, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
-import {AuthContext} from '../context/authContext';
+import {AuthContext} from '../../context/authContext';
 
 const Write = () => {
     const state = useLocation().state;
