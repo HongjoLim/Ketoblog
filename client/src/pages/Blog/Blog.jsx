@@ -2,12 +2,11 @@ import { useState, useEffect, useContext } from 'react';
 import Delete from '../images/delete.png';
 import Edit from '../images/edit.png';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import Menu from '../components/Menu';
 import axios from 'axios';
 import moment from 'moment';
 
 import DOMPurify from 'dompurify';
-import { AuthContext } from '../context/authContext';
+import { AuthContext } from '../../context/authContext';
 
 const Blog = () => {
 

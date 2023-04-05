@@ -1,12 +1,12 @@
 import React from 'react';
-import Logo from '../images/logo.png';
+import './Footer.css';
+
 
 const Footer = () => {
     return (
-        <footer>
-            <img src={Logo} alt='logo' />
+        <div className='foot'>
             <span>Share your ketogenic life</span>
-        </footer>
+        </div>
     )
 }
 
