@@ -1,11 +1,11 @@
-import "./Post.css";
+import './Post.css';
 
-const Posts = () => {
-  return (
-    <div className="post">
-        Post
-    </div>
-  );
+const Post = ({post}) => {
+    return (
+        <div className='post'>
+            {post}
+        </div>
+    );
 }
 
-export default Posts;
+export default Post;

@@ -1,51 +1,28 @@
-import { Link } from "react-router-dom";
-import "./Sidebar.css";
+import './Sidebar.css';
 
-export default function Sidebar() {
-  return (
-    <div className="sidebar">
-      <div className="sidebarItem">
-        <span className="sidebarTitle">ABOUT ME</span>
-        <p>
-          Laboris sunt aute cupidatat velit magna velit ullamco dolore mollit
-          amet ex esse.Sunt eu ut nostrud id quis proident.
-        </p>
-      </div>
-      <div className="sidebarItem">
-        <span className="sidebarTitle">CATEGORIES</span>
-        <ul className="sidebarList">
-          <li className="sidebarListItem">
-            <Link className="link" to="/posts?cat=Life">
-              Life
-            </Link>
-          </li>
-          <li className="sidebarListItem">
-            <Link className="link" to="/posts?cat=Music">
-              Music
-            </Link>
-          </li>
-          <li className="sidebarListItem">
-            <Link className="link" to="/posts?cat=Sport">
-              Sport
-            </Link>
-          </li>
-          <li className="sidebarListItem">
-            <Link className="link" to="/posts?cat=Style">
-              Style
-            </Link>
-          </li>
-          <li className="sidebarListItem">
-            <Link className="link" to="/posts?cat=Tech">
-              Tech
-            </Link>
-          </li>
-          <li className="sidebarListItem">
-            <Link className="link" to="/posts?cat=Cinema">
-              Cinema
-            </Link>
-          </li>
-        </ul>
-      </div>
-    </div>
-  );
+const Sidebar = () => {
+    return (
+        <div className="sidebar">
+            <div className='sidebarItem'>
+                <span className='sidebarTitle'>
+                    More posts
+                </span>
+                <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                </p>
+            </div>
+            <div className='sidebarItem'>
+                <span className='sidebarTitle'>
+                    Categories
+                </span>
+                <ul className='sidebarList'>
+                    <li className='sidebarListItem'>Recipes</li>
+                    <li className='sidebarListItem'>Food</li>
+                    <li className='sidebarListItem'>Nutrition</li>                  
+                </ul>
+            </div>
+        </div>
+    );
 }
+
+export default Sidebar;
