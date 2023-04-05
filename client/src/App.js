@@ -1,68 +1,17 @@
-import './App.scss';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Write from './pages/Write';
-import Home from './pages/Home';
-import Blog from './pages/Blog';
-import Login from './pages/Login';
-import Register from './pages/Register';
+import Topbar from './components/Topbar/Topbar';
+import Home from './pages/Home/Home';
+import Footer from './components/Footer/Footer';
 
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Outlet
-} from 'react-router-dom';
-
-const Layout = () => {
-  return (
-    <>
-      <Navbar/>
-      <Outlet/>
-      <Footer/>
-    </>
-  );
-}
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Layout />,
-    children: [
-      {
-        path: '/',
-        element: <Home />
-      },
-      {
-        path: '/blog/:id',
-        element: <Blog />
-      },
-      {
-        path: '/write',
-        element: <Write />
-      },
-    ]
-  },
-  {
-    path: '/register',
-    element: <Register />
-  },
-  {
-    path: '/home',
-    element: <Home />
-  },
-  {
-    path: '/login',
-    element: <Login />
-  },
-]);
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 const App = () => {
+  const currentUser = true;
   return (
-    <div className="app">
-      <div className="container">
-        <RouterProvider router={router}/>
-      </div>
-    </div>
+    <BrowserRouter >
+      <Topbar />
+      <Home />
+      <Footer />
+    </BrowserRouter>
   );
 }
 

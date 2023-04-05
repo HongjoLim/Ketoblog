@@ -1,0 +1,60 @@
+.top {
+    height: 20vh;
+    width: 100%;
+    position: sticky;
+    align-items: center;
+    display: flex;
+    font-family: "Josefin Sans", sans-serif;
+}
+
+.top-left {
+    flex: 1;
+    height: 100%;
+}
+
+.top-center {
+    flex: 3;
+    height: 100%;
+}
+
+.cats {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.cat {
+    color: #666;
+}
+
+.link {
+    margin-right: 50px;
+    font-size: 30px;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+.link:hover {
+    color:grey;
+}
+
+.link-post {
+    margin-left: 30px;
+}
+
+.top-right {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    color: #666;
+}
+
+.topSearchIcon {
+    font-size: 30px;
+    cursor: pointer;
+}

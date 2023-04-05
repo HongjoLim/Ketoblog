@@ -1,0 +1,19 @@
+.header {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.headerTitles {
+    background-color: blue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.headerImg {
+    width: 50%;
+    height: 50%;
+    margin-top: 20px;
+  }
