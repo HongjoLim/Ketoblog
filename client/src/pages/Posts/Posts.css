@@ -1,6 +1,12 @@
 .posts {
     flex: 7;
     display: flex;
+    flex-wrap: wrap;
+    margin: 20px
+}
+
+.postInfo {
+    display: flex;
     align-items: center;
     justify-content: center;
 }
