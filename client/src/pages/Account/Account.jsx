@@ -2,12 +2,12 @@ import Sidebar from '../../components/Sidebar/Sidebar';
 import './Account.css';
 
 const Account = () => {
-    const currentUser = { name: "Hongjo" }
+    const currentUser = { fistname: "Hongjo" }
     return (
         <div className="account">
             <div className='accountWrapper'>
                 <h1>Your Account</h1>
-                <span>Welcome back, <b>{currentUser.name}</b></span>
+                <span>Welcome back, <b>{currentUser.fistname}</b></span>
                 <br/>
                 <br/>
                 <p>Here you can manage your account info</p>

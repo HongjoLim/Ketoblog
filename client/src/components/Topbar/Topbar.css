@@ -13,7 +13,7 @@
 }
 
 .top-center {
-    flex: 3;
+    flex: 2;
     height: 100%;
 }
 
@@ -48,12 +48,26 @@
 
 .top-right {
     flex: 1;
-    align-items: center;
     display: flex;
+    align-items: center;
     color: #666;
 }
 
 .topSearchIcon {
     font-size: 30px;
     cursor: pointer;
+}
+
+.top-right-authLink{
+    font-size: 20px;
+    margin-left: 20px;
+}
+
+.link-post{
+    font-size: 20px;
+    margin-left: 20px;
+}
+
+.link-post:hover{
+    background-color: #ddd;
 }
