@@ -31,11 +31,18 @@ const Topbar = () => {
                             NUTRITION
                         </Link>
                     </li>
-                    {currentUser && <li className="cat">Sign Out</li>}
                 </ul>
             </div>
             <div className='top-right'>
                 <i className="topSearchIcon fas fa-search"></i>
+                {currentUser ?
+                    <Link className='link' to='/login'>
+                        <span className='top-right-authLink'> Sign Out</span>
+                    </Link> :
+                    <Link className='link' to='/login'>
+                        <span className='top-right-authLink'> Log In</span>
+                    </Link>
+                }
                 {currentUser &&
                     <Link className="link" to="/write">
                         <span className='link-post'>POST</span>

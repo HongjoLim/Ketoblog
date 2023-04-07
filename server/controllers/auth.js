@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 export const getUser = async (req, res) => {
-    await User.findOne({ user_email: req.params.user_email })
+    await User.findOne({ email: req.params.email })
     .then(user => {
         if (user) {
             res.status(200).json(user);
@@ -14,18 +14,17 @@ export const getUser = async (req, res) => {
 };
 
 export const register = async (req, res) => {
-    await User.findOne({ user_email: req.body.user_email })
+    await User.findOne({ email: req.body.email })
     .then(user => {
         if (!user) {
             const salt = bcrypt.genSaltSync(10);
             const hash = bcrypt.hashSync(req.body.password, salt);
     
             new User({
-                name: req.body.name,
-                surname: req.body.surname,
-                user_email: req.body.user_email,
-                password: hash,
-                joined: new Date()
+                firstname: req.body.firstname,
+                lastname: req.body.lastname,
+                email: req.body.email,
+                password: hash
             }).save();
     
             res.status(200).json('Successfully registered');
@@ -36,7 +35,7 @@ export const register = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-    await User.findOne({ user_email: req.body.user_email })
+    await User.findOne({ email: req.body.email })
         .then(user => {
             if (!user) {
                 res.status(404).json('You have not registered yet.');

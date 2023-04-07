@@ -7,12 +7,11 @@ import axios from 'axios';
 const Register = () => {
 
     const [user, setUser] = useState({
-        name: '',
-        surname: '',
-        user_email: '',
+        firstname: '',
+        lastname: '',
+        email: '',
         password: '',
-        img_url: null,
-        joined: Date.now
+        img: null,
     });
 
     const [err, setErr] = useState(null);
@@ -38,9 +37,9 @@ const Register = () => {
         <div className='auth'>
             <h1>Register</h1>
             <form className='authForm'>
-                <input className='authInput' type='text' placeholder='first name' name='name' onChange={handleChange}/>
-                <input className='authInput' type='text' placeholder='last name' name='surname' onChange={handleChange}/>
-                <input className='authInput' type='email' placeholder='email' name='user_email' onChange={handleChange}/>
+                <input className='authInput' type='text' placeholder='first name' name='firstname' onChange={handleChange}/>
+                <input className='authInput' type='text' placeholder='last name' name='lastname' onChange={handleChange}/>
+                <input className='authInput' type='email' placeholder='email' name='email' onChange={handleChange}/>
                 <input className='authInput' type='password' placeholder='password' name='password' onChange={handleChange}/>
                 <button className='authButton' onClick={handleSubmit}>Register</button>
                 {err && <p>{err}</p>}
