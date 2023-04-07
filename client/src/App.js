@@ -4,8 +4,8 @@ import Footer from './components/Footer/Footer';
 import BlogDetail from './pages/BlogDetail/BlogDetail';
 import Write from './pages/Write/Write';
 import Account from './pages/Account/Account';
-import Login from './pages/Login/Login';
-import Register from './pages/Register/Register';
+import Login from './pages/Auth/Login';
+import Register from './pages/Auth/Register';
 
 import {
   createBrowserRouter,

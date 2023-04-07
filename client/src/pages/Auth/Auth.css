@@ -1,0 +1,37 @@
+.auth {
+    height: calc(60vh - 50px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.authForm {
+    width: 15%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.authInput {
+    padding: 10px;
+    background-color: white;
+    border: none;
+    border-bottom: 1px solid grey;
+  }
+
+  .authInput:focus {
+    outline: none;
+  }
+
+  .authButton {
+    cursor: pointer;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: lightcoral;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+  }
