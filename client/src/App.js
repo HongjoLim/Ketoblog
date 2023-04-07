@@ -23,6 +23,7 @@ const Layout = () => (
 );
 
 const App = () => {
+  const currentUser = null;
   const router = createBrowserRouter([
     {
       element: <Layout />,
@@ -37,19 +38,19 @@ const App = () => {
         },
         {
           path: "/login",
-          element: <Login />
+          element: currentUser ? <Home /> : <Login />
         },
         {
           path: "/register",
-          element: <Register />
+          element: currentUser ? <Home /> : <Register />
         },
         {
           path: "/account",
-          element: <Account />
+          element: currentUser ? <Account /> : <Login />
         },
         {
           path: "/write",
-          element: <Write />
+          element: currentUser ? <Write /> : <Login />
         },
         {
           path: "/blog",
