@@ -4,19 +4,66 @@ import Footer from './components/Footer/Footer';
 import BlogDetail from './pages/BlogDetail/BlogDetail';
 import Write from './pages/Write/Write';
 import Account from './pages/Account/Account';
+import Login from './pages/Login/Login';
+import Register from './pages/Register/Register';
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Outlet
+} from "react-router-dom";
+
+
+const Layout = () => (
+  <>
+    <Topbar />
+    <Outlet />
+    <Footer />
+  </>
+);
 
 const App = () => {
-  const currentUser = true;
+  const currentUser = null;
+  const router = createBrowserRouter([
+    {
+      element: <Layout />,
+      children: [
+        {
+          path: "/",
+          element: <Home />
+        },
+        {
+          path: "/home",
+          element: <Home />
+        },
+        {
+          path: "/login",
+          element: currentUser ? <Home /> : <Login />
+        },
+        {
+          path: "/register",
+          element: currentUser ? <Home /> : <Register />
+        },
+        {
+          path: "/account",
+          element: currentUser ? <Account /> : <Login />
+        },
+        {
+          path: "/write",
+          element: currentUser ? <Write /> : <Login />
+        },
+        {
+          path: "/blog",
+          element: <BlogDetail />
+        }]
+    }
+  ]);
+
   return (
-    <BrowserRouter >
+    <RouterProvider router={router}>
       <Topbar />
-      <Home />
-      <BlogDetail />
-      <Account />
       <Footer />
-    </BrowserRouter>
+    </RouterProvider>
   );
 }
 
