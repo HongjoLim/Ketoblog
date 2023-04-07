@@ -3,6 +3,7 @@ import Home from './pages/Home/Home';
 import Footer from './components/Footer/Footer';
 import BlogDetail from './pages/BlogDetail/BlogDetail';
 import Write from './pages/Write/Write';
+import Account from './pages/Account/Account';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -13,7 +14,7 @@ const App = () => {
       <Topbar />
       <Home />
       <BlogDetail />
-      <Write />
+      <Account />
       <Footer />
     </BrowserRouter>
   );
