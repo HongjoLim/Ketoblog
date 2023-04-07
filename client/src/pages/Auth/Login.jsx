@@ -1,3 +1,5 @@
+import './Auth.css';
+
 import { useState, useContext } from 'react';
 import { Link, useNavigate} from 'react-router-dom';
 import { AuthContext } from '../../context/authContext';
@@ -30,11 +32,11 @@ const Login = () => {
     }
     return (
         <div className='auth'>
-            <h1>Login</h1>
-            <form>
-                <input type='text' placeholder='email' name='user_email' onChange={handleChange}/>
-                <input type='password' placeholder='password' name='password' onChange={handleChange}/>
-                <button onClick={handleSubmit}>Sign In</button>
+            <h1 className='authTitle'>Login</h1>
+            <form className='authForm'>
+                <input className='authInput' type='text' placeholder='email' name='user_email' onChange={handleChange}/>
+                <input className='authInput' type='password' placeholder='password' name='password' onChange={handleChange}/>
+                <button className='authButton' onClick={handleSubmit}>Sign In</button>
                 {err && <p>{err}</p>}
                 <span>Not registered yet? <Link to='/register'>Register</Link></span>
             </form>
