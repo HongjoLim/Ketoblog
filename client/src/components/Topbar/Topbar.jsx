@@ -18,17 +18,17 @@ const Topbar = () => {
                 <ul className='cats'>
                     <li className='cat'>
                         <Link className='link' to='/?cat=recipes'>
-                            RECIPES
+                            Recipes
                         </Link>
                     </li>
                     <li className='cat'>
                         <Link className='link' to='/?cat=food'>
-                            FOOD
+                            Food
                         </Link>
                     </li>
                     <li className='cat'>
                         <Link className='link' to='/?cat=nutrition'>
-                            NUTRITION
+                            Nutrition
                         </Link>
                     </li>
                 </ul>
@@ -45,7 +45,12 @@ const Topbar = () => {
                 }
                 {currentUser &&
                     <Link className="link" to="/write">
-                        <span className='link-post'>POST</span>
+                        <span className='link-post'>Post</span>
+                    </Link>
+                }
+                {currentUser &&
+                    <Link className="link" to="/account">
+                        <span className='link-post'>Account</span>
                     </Link>
                 }
             </div>
