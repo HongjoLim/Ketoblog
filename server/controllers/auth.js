@@ -15,9 +15,8 @@ export const getUser = async (req, res) => {
 };
 
 export const updateUser = async (req, res) => {
-    if (req.body.email === req.params.email && req.body.password){
-        const salt = await bcrypt.genSalt(10);
-        req.body.password = await bcrypt.hash(req.body.password, salt);
+    if ((req.body.email === req.params.email) && req.body.password){
+        req.body.password = await bcrypt.hash(req.body.password, 10);
     }
 
     try{
@@ -27,6 +26,8 @@ export const updateUser = async (req, res) => {
         {
             new: true
         });
+
+        res.status(200).json(updatedUser);
     } catch (err){
         res.status(500).json(err);
     }
@@ -36,8 +37,9 @@ export const register = async (req, res) => {
     await User.findOne({ email: req.body.email })
     .then(user => {
         if (!user) {
-            const salt = bcrypt.genSaltSync(10);
-            const hash = bcrypt.hashSync(req.body.password, salt);
+            console.log(req.body.password);
+            console.log(req.body.email); 
+            const hash = bcrypt.hashSync(req.body.password, 10);
     
             new User({
                 firstname: req.body.firstname,
@@ -88,8 +90,12 @@ export const deleteUser = async (req, res) => {
                 res.status(404).json('User not found');
             }
 
-            await User.findOneAndDelete({ email: req.params.email });
-            res.status(200).json('User has been deleted');
+            if(bcrypt.compareSync(req.body.password, user.password)) {
+                await User.findOneAndDelete({ email: req.params.email });
+                res.status(200).json('User has been deleted');
+            } else {
+                res.status(403).json('Password does not match');
+            }
         } catch (err) {
             res.status(500).json(err);
         }
