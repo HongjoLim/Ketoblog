@@ -8,6 +8,6 @@ authRouter.put('/:email', updateUser);
 authRouter.post('/register', register);
 authRouter.post('/login', login);
 authRouter.post('/logout', logout);
-authRouter.delete(':email', deleteUser)
+authRouter.delete('/:email', deleteUser)
 
 export default authRouter;
