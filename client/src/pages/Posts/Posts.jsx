@@ -1,14 +1,12 @@
 import './Posts.css';
 import Post from '../../components/Post/Post'
 
-const Posts = () => {
+const Posts = ({posts}) => {
     return (
         <div className='posts'>
-            <Post post={"post1"}/>
-            <Post post={"post2"}/>
-            <Post post={"post3"}/>          
-            <Post post={"post4"}/>
-            <Post post={"post5"}/>
+            {posts.map(p => (
+                <Post key={p._id} post={p}/>
+            ))}
         </div>
     );
 }

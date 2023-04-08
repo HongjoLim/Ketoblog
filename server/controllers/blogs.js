@@ -27,6 +27,7 @@ export const getBlogs = async (req, res) => {
 }
 
 export const getBlog = async (req, res) => {
+
     try {
         const blog = await Blog.findById(req.params._id);
         res.status(200).json(blog);

@@ -6,6 +6,8 @@ import Write from './pages/Write/Write';
 import Account from './pages/Account/Account';
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
+import { useContext } from "react";
+import { AuthContext } from './context/authContext';
 
 import {
   createBrowserRouter,
@@ -23,7 +25,7 @@ const Layout = () => (
 );
 
 const App = () => {
-  const currentUser = null;
+  const { currentUser } = useContext(AuthContext);
   const router = createBrowserRouter([
     {
       element: <Layout />,
@@ -53,7 +55,7 @@ const App = () => {
           element: currentUser ? <Write /> : <Login />
         },
         {
-          path: "/blog",
+          path: "/blog/:_id",
           element: <BlogDetail />
         }]
     }
@@ -61,8 +63,6 @@ const App = () => {
 
   return (
     <RouterProvider router={router}>
-      <Topbar />
-      <Footer />
     </RouterProvider>
   );
 }

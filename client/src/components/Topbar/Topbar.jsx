@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { Link } from "react-router-dom";
-import Logo from '../../images/logo.png';
 import { AuthContext } from '../../context/authContext';
 import './Topbar.css';
 
@@ -18,17 +17,17 @@ const Topbar = () => {
                 <ul className='cats'>
                     <li className='cat'>
                         <Link className='link' to='/?cat=recipes'>
-                            RECIPES
+                            Recipes
                         </Link>
                     </li>
                     <li className='cat'>
                         <Link className='link' to='/?cat=food'>
-                            FOOD
+                            Food
                         </Link>
                     </li>
                     <li className='cat'>
                         <Link className='link' to='/?cat=nutrition'>
-                            NUTRITION
+                            Nutrition
                         </Link>
                     </li>
                 </ul>
@@ -45,7 +44,12 @@ const Topbar = () => {
                 }
                 {currentUser &&
                     <Link className="link" to="/write">
-                        <span className='link-post'>POST</span>
+                        <span className='link-post'>Post</span>
+                    </Link>
+                }
+                {currentUser &&
+                    <Link className="link" to="/account">
+                        <span className='link-post'>Account</span>
                     </Link>
                 }
             </div>

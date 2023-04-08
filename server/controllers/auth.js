@@ -37,8 +37,6 @@ export const register = async (req, res) => {
     await User.findOne({ email: req.body.email })
     .then(user => {
         if (!user) {
-            console.log(req.body.password);
-            console.log(req.body.email); 
             const hash = bcrypt.hashSync(req.body.password, 10);
     
             new User({
