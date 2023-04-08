@@ -6,12 +6,31 @@ export const getUser = async (req, res) => {
     await User.findOne({ email: req.params.email })
     .then(user => {
         if (user) {
-            res.status(200).json(user);
+            const {password, ...others} = user._doc;
+            res.status(200).json(others);
         } else {
             res.status(404).json('User not found');
         }
     });
 };
+
+export const updateUser = async (req, res) => {
+    if (req.body.email === req.params.email && req.body.password){
+        const salt = await bcrypt.genSalt(10);
+        req.body.password = await bcrypt.hash(req.body.password, salt);
+    }
+
+    try{
+        const updatedUser = await User.findOneAndUpdate({ email: req.params.email }, {
+            $set: req.body
+        },
+        {
+            new: true
+        });
+    } catch (err){
+        res.status(500).json(err);
+    }
+}
 
 export const register = async (req, res) => {
     await User.findOne({ email: req.body.email })
@@ -60,3 +79,21 @@ export const logout = (req, res) => {
         secure: true
     }).status(200).json('You successfully signed out.');
 };
+
+export const deleteUser = async (req, res) => {
+    if(req.body.email === req.params.email){
+        try {
+            const user = await User.findOne({ email: req.params.email });
+            if (!user) {
+                res.status(404).json('User not found');
+            }
+
+            await User.findOneAndDelete({ email: req.params.email });
+            res.status(200).json('User has been deleted');
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    } else {
+        res.status(401).json(err)
+    }
+}

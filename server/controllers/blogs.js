@@ -2,12 +2,33 @@ import Blog from '../models/blog.js';
 import jwt from "jsonwebtoken";
 
 export const getBlogs = async (req, res) => {
-    const blogs = await Blog.find();
+    const user_email = req.query.email;
+    const cat = req.query.cat;
+
+    try{
+
+        let blogs;
+        
+        if(user_email) {
+            blogs = await Blog.find({user_email});
+        } else if (cat) {
+            blogs = await Blog.find({
+                categories: {
+                    $in: [cat],
+                }
+            });
+        } else {
+            blogs = await Blog.find();
+        }
+
     res.status(200).send(blogs);
+    } catch(err) {
+        res.status(500).json(err);
+    }
 }
 
 export const getBlog = async (req, res) => {
-    const blog = await Blog.findOne({_id: req.params._id});
+    const blog = await Blog.findById(req.params._id);
     res.status(200).json(blog);
 }
 
@@ -26,10 +47,9 @@ export const addBlog = async (req, res) => {
 
     const blog = new Blog({
         title: req.body.title,
-        content: req.body.content,
-        img_url: req.body.img_url,
-        cat: req.body.cat,
-        date: req.body.date,
+        desc: req.body.content,
+        img: req.body.img_url,
+        cats: req.body.cats,
         user_email: req.body.user_email
     });
     await blog.save();
@@ -46,7 +66,7 @@ export const deleteBlog = (req, res) => {
         if (err){
             res.status(403).json('Invalid access token');
         } else {
-            await Blog.deleteOne({_id: req.params._id});
+            await Blog.findByIdAndDelete(req.params._id);
             res.status(200).send('deleted');
         }
     });

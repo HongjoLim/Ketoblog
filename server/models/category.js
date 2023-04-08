@@ -3,7 +3,10 @@ const { Schema } = mongoose;
 
 const catSchema = new Schema(
 {
-    name: String
+    name:  {
+        type: String,
+        required: true
+    },
 });
 
 const Category = mongoose.model('Category', catSchema);
