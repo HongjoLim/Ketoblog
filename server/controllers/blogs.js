@@ -2,8 +2,9 @@ import Blog from '../models/blog.js';
 import jwt from "jsonwebtoken";
 
 export const getBlogs = async (req, res) => {
-    const user_email = req.query.email;
-    const cat = req.query.cat;
+    const user_email = req.query.user_email;
+    const cat = req.query.cat
+    
     try {
 
         let blogs;
