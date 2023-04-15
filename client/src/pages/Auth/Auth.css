@@ -1,5 +1,5 @@
 .auth {
-    height: calc(70vh - 50px);
+    height: calc(80vh - 50px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -35,4 +35,18 @@
     border: none;
     border-radius: 10px;
     text-align: center;
+  }
+
+  .authButton:disabled {
+    cursor: not-allowed;
+    background-color: coral;
+  }
+
+  .authWarning {
+    color: red;
+    margin-bottom: 10px;
+  }
+
+  .authRedirect {
+    margin-bottom: 20px;
   }

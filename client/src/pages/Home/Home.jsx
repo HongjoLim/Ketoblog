@@ -24,9 +24,7 @@ const Home = () => {
             api_url += `/?cat=${cat}`;
           }
 
-          console.log(api_url);
           const res = await axios.get(api_url);
-          console.log(res);
           setPosts(res.data);
       }
       fetchPosts();

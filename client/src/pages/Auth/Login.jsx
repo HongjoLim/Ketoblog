@@ -1,44 +1,41 @@
 import './Auth.css';
 
-import { useState, useContext } from 'react';
-import { Link, useNavigate} from 'react-router-dom';
-import { AuthContext } from '../../context/authContext';
+import { useRef, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { Context } from '../../context/Context';
+import { LOGIN_STATES } from '../../context/Actions';
 
 const Login = () => {
 
-    const [user, setUser] = useState({
-        email: '',
-        password: ''
-    });
-
-    const [err, setErr] = useState(null);
-
-    const handleChange = e => {
-        setUser(prev => ({...prev, [e.target.name]: e.target.value}));
-    }
+    const userRef = useRef();
+    const passwordRef = useRef();
+    const { dispatch, isFetching, error } = useContext(Context);
 
     const navigate = useNavigate();
 
-    const {login} = useContext(AuthContext);
-
     const handleSubmit = async (e) => {
         e.preventDefault();
+        dispatch({ type: LOGIN_STATES.START });
         try {
-            await login(user);
+            const user = { email: userRef.current.value, password: passwordRef.current.value }
+            const res = await axios.post('/api/auth/login', user);
+            dispatch({ type: LOGIN_STATES.SUCCESS, payload: res.data });
             navigate('/');
         } catch (err) {
-            setErr(err.response.data);
+            dispatch({ type: LOGIN_STATES.FAILURE, error: true });
         }
     }
+
     return (
         <div className='auth'>
             <h1 className='authTitle'>Login</h1>
-            <form className='authForm'>
-                <input className='authInput' type='text' placeholder='email' name='email' onChange={handleChange}/>
-                <input className='authInput' type='password' placeholder='password' name='password' onChange={handleChange}/>
-                <button className='authButton' onClick={handleSubmit}>Sign In</button>
-                {err && <p>{err}</p>}
-                <span>Not registered yet? <Link to='/register'>Register</Link></span>
+            <form className='authForm' onSubmit={handleSubmit}>
+                <input className='authInput' type='text' placeholder='email' name='email' ref={userRef} />
+                <input className='authInput' type='password' placeholder='password' name='password' ref={passwordRef} />
+                <button className='authButton' disabled={isFetching}>Sign In</button>
+                {error && <span className='authWarning'>{error}</span>}
+                <span className='authRedirect'>Not registered yet? <Link to='/register'>Register</Link></span>
             </form>
         </div>
     )

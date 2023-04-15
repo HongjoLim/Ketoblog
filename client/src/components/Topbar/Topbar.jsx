@@ -1,13 +1,11 @@
-import { useContext } from 'react';
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from '../../context/authContext';
+import { Context } from "../../context/Context";
 import './Topbar.css';
 
 const Topbar = () => {
 
-    const { login, logout } = useContext(AuthContext);
-
-    const { currentUser } = useContext(AuthContext);
+    const {user} = useContext(Context);
 
     return (
         <div className='top'>
@@ -35,28 +33,33 @@ const Topbar = () => {
             <div className='top-right'>
                 <i className="topSearchIcon fas fa-search"></i>
                 <ul className='links'>
-                    {currentUser &&
+                    {user &&
                         <li className='link-post'>
                             <Link className="link" to="/write">
                                 Post
                             </Link>
                         </li>
                     }
-                    {currentUser &&
+                    {user ?
                         <li className='link-account'>
                             <Link className="link" to="/account">
                                 Account
                             </Link>
-                        </li>
-                    }
-                    {currentUser ?
+                        </li> :
                         <li className='link-auth'>
-                            <Link className="link" to={logout}>
+                            <Link className="link" to='/register'>
+                                Register
+                            </Link>
+                        </li> 
+                    }
+                    {user ?
+                        <li className='link-auth'>
+                            <Link className="link" to=''>
                                 Log Out
                             </Link>
                         </li> :
                         <li className='link-auth'>
-                            <Link className="link" to={login}>
+                            <Link className="link" to='/login'>
                                 Log In
                             </Link>
                         </li>
