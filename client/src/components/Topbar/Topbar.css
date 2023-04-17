@@ -1,5 +1,5 @@
 .top {
-    height: 20vh;
+    height: 15vh;
     width: 100%;
     position: sticky;
     align-items: center;
@@ -13,11 +13,11 @@
 }
 
 .top-center {
-    flex: 2;
+    flex: 3;
     height: 100%;
 }
 
-.cats {
+.cats, .links {
     height: 100%;
     display: flex;
     align-items: center;
@@ -29,11 +29,11 @@
 
 .cat {
     color: #666;
+    font-size: 30px;
+    margin-right: 100px;
 }
 
 .link {
-    margin-right: 50px;
-    font-size: 30px;
     font-weight: 300;
     cursor: pointer;
 }
@@ -47,20 +47,17 @@
 }
 
 .top-right {
+    height: 100%;
     flex: 1;
     display: flex;
     align-items: center;
+    justify-content: center;
     color: #666;
 }
 
 .topSearchIcon {
-    font-size: 30px;
-    cursor: pointer;
-}
-
-.top-right-authLink{
     font-size: 20px;
-    margin-left: 20px;
+    cursor: pointer;
 }
 
 .link-post{
@@ -68,6 +65,7 @@
     margin-left: 20px;
 }
 
-.link-post:hover{
-    background-color: #ddd;
+.link-account, .link-auth{
+    font-size: 20px;
+    margin-left: 20px;
 }

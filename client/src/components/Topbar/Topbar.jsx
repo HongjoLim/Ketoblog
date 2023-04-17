@@ -1,13 +1,11 @@
-import { useContext } from 'react';
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from '../../context/authContext';
+import { Context } from "../../context/Context";
 import './Topbar.css';
 
 const Topbar = () => {
 
-    const { logout } = useContext(AuthContext);
-
-    const { currentUser } = useContext(AuthContext);
+    const {user} = useContext(Context);
 
     return (
         <div className='top'>
@@ -16,7 +14,7 @@ const Topbar = () => {
             <div className='top-center'>
                 <ul className='cats'>
                     <li className='cat'>
-                        <Link className='link' to='/?cat=recipes'>
+                        <Link className='link' to='/?cat=food'>
                             Recipes
                         </Link>
                     </li>
@@ -34,24 +32,39 @@ const Topbar = () => {
             </div>
             <div className='top-right'>
                 <i className="topSearchIcon fas fa-search"></i>
-                {currentUser ?
-                    <Link className='link' to='/login'>
-                        <span className='top-right-authLink'> Sign Out</span>
-                    </Link> :
-                    <Link className='link' to='/login'>
-                        <span className='top-right-authLink'> Log In</span>
-                    </Link>
-                }
-                {currentUser &&
-                    <Link className="link" to="/write">
-                        <span className='link-post'>Post</span>
-                    </Link>
-                }
-                {currentUser &&
-                    <Link className="link" to="/account">
-                        <span className='link-post'>Account</span>
-                    </Link>
-                }
+                <ul className='links'>
+                    {user &&
+                        <li className='link-post'>
+                            <Link className="link" to="/write">
+                                Post
+                            </Link>
+                        </li>
+                    }
+                    {user ?
+                        <li className='link-account'>
+                            <Link className="link" to="/account">
+                                Account
+                            </Link>
+                        </li> :
+                        <li className='link-auth'>
+                            <Link className="link" to='/register'>
+                                Register
+                            </Link>
+                        </li> 
+                    }
+                    {user ?
+                        <li className='link-auth'>
+                            <Link className="link" to=''>
+                                Log Out
+                            </Link>
+                        </li> :
+                        <li className='link-auth'>
+                            <Link className="link" to='/login'>
+                                Log In
+                            </Link>
+                        </li>
+                    }
+                </ul>
             </div>
         </div>
     );

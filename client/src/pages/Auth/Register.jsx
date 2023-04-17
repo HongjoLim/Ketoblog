@@ -42,8 +42,8 @@ const Register = () => {
                 <input className='authInput' type='email' placeholder='email' name='email' onChange={handleChange}/>
                 <input className='authInput' type='password' placeholder='password' name='password' onChange={handleChange}/>
                 <button className='authButton' onClick={handleSubmit}>Register</button>
-                {err && <p>{err}</p>}
-                <span>Have an account? <Link to='/login'>Login</Link></span>
+                {err && <span className='authWarning'>{err}</span>}
+                <span className='authRedirect'>Have an account? <Link to='/login'>Login</Link></span>
             </form>
         </div>
     )

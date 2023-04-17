@@ -1,7 +1,25 @@
 import './BlogContent.css';
 import sampleImg from '../../images/sample.jpg';
+import {useState, useEffect} from 'react';
+
+import {Link} from 'react-router-dom';
+
+import axios from 'axios';
 
 const BlogContent = ({post}) => {
+
+    const [postedUser, setPostedUser] = useState({});
+
+    useEffect (() => {
+        if (post.user_email) {
+            const getPostedUser = async () => {
+                const res = await axios.get(`/api/auth/${post.user_email}`);
+                setPostedUser(res.data);
+            }
+
+            getPostedUser();
+        }
+    }, []);
     return (
         <div className="blogContent">
             <div className='blogContentWrapper'>
@@ -14,8 +32,8 @@ const BlogContent = ({post}) => {
                     </div>
                 </h1>
                 <div className='blogContentInfo'>
-                    <span className='blogContentUser'>User: <b>{post?.user_email}</b></span>
-                    <span className='blogContentDate'>{new Date(post.createdAt).toDateString()}</span>
+                    <span className='blogContentUser'>Author: <Link className='link' to={`/`} state={{user_email: post.user_email}}><b>{`${postedUser?.firstname} ${postedUser?.lastname}`}</b></Link></span>
+                    <span className='blogContentDate'>Posted: {new Date(post.createdAt).toDateString()}</span>
                 </div>
                 <p className='blogContentContent'>{post?.desc}</p>
             </div>
