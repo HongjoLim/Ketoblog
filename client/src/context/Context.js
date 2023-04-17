@@ -2,7 +2,7 @@ import { createContext, useReducer, useEffect } from 'react';
 import Reducer from './Reducer';
 
 const INITIAL_STATE = {
-    user: localStorage.getItem("user") !== undefined ? JSON.parse(localStorage.getItem("user")) : null,
+    user: null,
     isFetching: false,
     error: false
 };
@@ -18,10 +18,8 @@ export const ContextProvider = ({ children }) => {
 
     return (
         <Context.Provider value={{ 
-            user: state.user, 
-            isFetching: state.isFetching, 
-            error: state.error, 
-        dispatch}}>
+            state,
+            dispatch}}>
             {children}
         </Context.Provider>
     )

@@ -4,13 +4,13 @@ export const LOGIN_STATES = {
     FAILURE: 2
 }
 
-export const LoginStart = (creds) => ({
+export const LoginStart = creds => ({
     type: LOGIN_STATES.START
 })
 
-export const LoginSuccess = (user) => ({
+export const LoginSuccess = user => ({
     type: LOGIN_STATES.SUCCESS,
-    payload:user,
+    payload: user,
 })
 
 export const LoginFailure = () => ({

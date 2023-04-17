@@ -26,6 +26,8 @@ const Layout = () => (
 
 const App = () => {
   const { user } = useContext(Context);
+  console.log(user);
+  
   const router = createBrowserRouter([
     {
       element: <Layout />,
