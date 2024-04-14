@@ -30,10 +30,10 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-      run: cd server; npm start
+    - run: cd server; npm start
     - name: Run client
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-      run: cd client; npm start
+    - run: cd client; npm start
 
