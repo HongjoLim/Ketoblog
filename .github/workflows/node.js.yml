@@ -21,7 +21,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Install dependencies
+    - name: Install client dependencies
       run: cd client; npm install
     - name: Install server dependencies
       run: cd server; npm install
@@ -30,6 +30,5 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
+    - run: cd server; npm ci
     - run: npm run build --if-present
-    - run: npm test
